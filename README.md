@@ -5,7 +5,7 @@ A modular and scalable Express.js REST API boilerplate built with ES Modules, Se
 ---
 
 ## 📂 Project Structure
-
+```bash
 project-root/
 │
 ├── controllers/          # Route logic (e.g., signup, login)
@@ -25,7 +25,7 @@ project-root/
 ├── server.js             # Entry point - server bootstrap and DB sync
 │
 └── README.md             # Project documentation
-
+```
 
 
 ## 🧰 Features
