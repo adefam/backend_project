@@ -25,4 +25,3 @@ export default {
   getExample,
   createExample
 };
-  

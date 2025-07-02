@@ -11,6 +11,3 @@ export const login = (req, res, next) => {
         message: 'Login route are working'
     })
 };
-
-// export default { signup };
-
