@@ -2,8 +2,6 @@ export const notFoundHandler = (req, res, next) => {
     res.status(404).send('Router Not Found');
   };
 
-
-  
   export const errorHandler = (err, req, res, next) => {
     // Log the error details to the console
     console.error({
@@ -20,4 +18,3 @@ export const notFoundHandler = (req, res, next) => {
       error: err.name || 'InternalServerError',
     });
   };
-  

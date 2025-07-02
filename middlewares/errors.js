@@ -1,4 +1,3 @@
-
 class UserAuthError extends Error {
     constructor(message = 'Permission error') {
       super(message);
@@ -8,4 +7,3 @@ class UserAuthError extends Error {
   }
   
   export { UserAuthError };
-  
