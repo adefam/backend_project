@@ -5,17 +5,27 @@ A modular and scalable Express.js REST API boilerplate built with ES Modules, Se
 ---
 
 ## 📂 Project Structure
-
+```bash
 project-root/
-├── controllers/ # Route logic (e.g., signup, login)
-├── middlewares/ # Custom error handlers, auth middleware
-├── models/ # Sequelize models and DB connection
-├── routes/ # Express route definitions
-├── public/ # Static files (if needed)
-├── .env # Environment variables
-├── app.js # App configuration and middleware
-├── server.js # Server bootstrap and DB sync
-└── README.md # This file
+│
+├── controllers/          # Route logic (e.g., signup, login)
+│
+├── middlewares/          # Custom error handlers, auth middleware
+│
+├── models/               # Sequelize models and DB configuration
+│
+├── routes/               # Express route definitions
+│
+├── public/               # Static files (images, CSS, etc.)
+│
+├── .env                  # Environment variables (not committed)
+│
+├── app.js                # Express app configuration and middleware
+│
+├── server.js             # Entry point - server bootstrap and DB sync
+│
+└── README.md             # Project documentation
+```
 
 
 ## 🧰 Features
