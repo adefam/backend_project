@@ -1,5 +1,6 @@
 import bcrypt from 'bcrypt';
 import db from '../models/index.js';
+import AppError from '../utils/appError.js';
 
 const {User} = db;
 
@@ -9,19 +10,13 @@ export const signup = async (req, res, next) => {
     
         // Step 1: Validate input
         if (!firstName || !lastName || !email || !password) {
-          return res.status(400).json({
-            status: 'fail',
-            message: 'All fields are required',
-          });
+          throw new AppError('All fields are required', 400);
         }
     
         // Step 2: Check if user already exists
         const existingUser = await User.findOne({ where: { email } });
         if (existingUser) {
-          return res.status(409).json({
-            status: 'fail',
-            message: 'Email is already registered',
-          });
+          throw new AppError('Email already exists', 409);
         }
     
         // Step 3: Hash the password
@@ -48,13 +43,11 @@ export const signup = async (req, res, next) => {
         });
     
       } catch (error) {
-        console.error('Signup Error:', error);
-        return res.status(500).json({
-          status: 'error',
-          message: 'An error occurred while processing your request',
-        });
+        next(error)
       }
 };
+
+
 
 export const login = (req, res, next) => {
     res.json({
