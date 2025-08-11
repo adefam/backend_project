@@ -30,6 +30,10 @@ export default (sequelize, DataTypes) => {
       isVerified: {
         type: DataTypes.BOOLEAN,
         defaultValue: false
+      },
+      refreshToken: {
+        type: DataTypes.STRING,
+        allowNull: true
       }
     }, {
       tableName: 'users',
