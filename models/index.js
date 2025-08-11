@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import { Sequelize, DataTypes } from 'sequelize';
 import config from '../config/config.js';
-import { fileURLToPath } from 'url';
+import { fileURLToPath, pathToFileURL } from 'url';
 
 // Get the current file URL and convert it to a file path
 const __filename = fileURLToPath(import.meta.url);
@@ -48,7 +48,10 @@ const modelFiles = fs.readdirSync(__dirname)
 const importModels = async () => {
   for (const file of modelFiles) {
     const modelPath = path.join(__dirname, file);
-    const model = (await import(modelPath)).default(sequelize, DataTypes);
+
+    const modelUrl = pathToFileURL(modelPath).href;
+
+    const model = (await import(modelUrl)).default(sequelize, DataTypes);
     db[model.name] = model;
   }
 

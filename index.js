@@ -1,5 +1,6 @@
 import 'dotenv/config';
 import express from 'express';
+import cookieParser from 'cookie-parser';
 
 import cors from 'cors'; // Enable CORS for all routes and Allows backend to accept requests from different origins
 
@@ -7,6 +8,7 @@ import { notFoundHandler, errorHandler } from './middlewares/errorHandlers.js';
 import authRouter from './routes/authRoute.js';
 import indexRouter from './routes/index.js';
 import db from './models/index.js';
+import { detectBrowserPlatform } from './middlewares/detectBrowserPlatform.js';
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -16,11 +18,21 @@ const env = process.env.NODE_ENV || 'development';
 //Middleware to parse JSON bodies
 app.use(express.json());
 
-app.use(cors()); // Use CORS middleware to allow cross-origin requests
+app.use(cookieParser());
+
+// Middleware to detect browser platform
+app.use(detectBrowserPlatform);
+
+app.use(cors(
+  // {
+  //   origin: process.env.CLIENT_URL || '*', // change to your frontend URL in production
+  //   credentials: true // allow cookies from frontend
+  // }
+)); // Use CORS middleware to allow cross-origin requests
+
 
 // Serve static files from the "public" directory
 // app.use(express.static(path.join(__dirname, 'public')));
-
 
 // Default Page
 app.get('/', (req, res) => {
@@ -33,8 +45,6 @@ app.get('/', (req, res) => {
 // General Routes Loader
 app.use('/api/v1/auth', authRouter);
 app.use('/api', indexRouter);
-
-
 
 // Error Handling middleware
 app.use(notFoundHandler);
